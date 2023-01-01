@@ -147,6 +147,15 @@ class ViewController: UIViewController {
         foreProgressLayer.timeOffset = pausedTime
     }
     
+    func resumeAnimation() {
+        let pausedTime = foreProgressLayer.timeOffset
+        foreProgressLayer.speed = 1.0
+        foreProgressLayer.timeOffset = 0.0
+        foreProgressLayer.beginTime = -0.6
+        let timeSincePaused = foreProgressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        foreProgressLayer.beginTime = timeSincePaused
+    }
+    
     // MARK: - Setup
     
     private func setupHierarchy() {
