@@ -43,10 +43,15 @@ class ViewController: UIViewController {
         return button
     }()
     
+    let foreProgressLayer = CAShapeLayer()
+    let backProgressLayer = CAShapeLayer()
+    let animation = CABasicAnimation(keyPath: "strokeEnd")
+    
     var timer = Timer()
     var isTimerStarted = false
     var time = 10
     var isWorkTime = false
+    var isAnimationStarted = false
     
     // MARK: - Lifecucle
     
