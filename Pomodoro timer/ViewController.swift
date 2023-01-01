@@ -72,10 +72,10 @@ class ViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            startResumeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
+            startResumeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
             startResumeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startResumeButton.heightAnchor.constraint(equalToConstant: 150),
-            startResumeButton.widthAnchor.constraint(equalToConstant: 150)
+            startResumeButton.heightAnchor.constraint(equalToConstant: 50),
+            startResumeButton.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
     
