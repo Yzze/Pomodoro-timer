@@ -22,6 +22,17 @@ class ViewController: UIViewController {
         return label
     }()
     
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:10"
+        label.font = .boldSystemFont(ofSize: 22)
+        label.textColor = .red
+        label.textAlignment = .center
+        label.numberOfLines = 5
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // MARK: - Lifecucle
     
     override func viewDidLoad() {
