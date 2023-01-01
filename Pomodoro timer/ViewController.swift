@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CAAnimationDelegate {
     
     // MARK: - Outlets
     
@@ -54,6 +54,7 @@ class ViewController: UIViewController {
     var isWorkTime = false
     var isAnimationStarted = false
     var colorProgressLayer = UIColor.red.cgColor
+    var duration = 10.0
     
     // MARK: - Lifecucle
     
@@ -70,6 +71,7 @@ class ViewController: UIViewController {
     @objc func updateTimer() {
         if time < 1 && isWorkTime {
             timer.invalidate()
+            duration = 10.0
             isAnimationStarted = false
             isTimerStarted = false
             time = 10
@@ -81,6 +83,7 @@ class ViewController: UIViewController {
             startResumeButton.tintColor = .red
         } else if time < 1 {
             timer.invalidate()
+            duration = 5.0
             isAnimationStarted = false
             isTimerStarted = false
             isWorkTime = true
@@ -124,7 +127,7 @@ class ViewController: UIViewController {
         animation.keyPath = "strokeEnd"
         animation.fromValue = 0
         animation.toValue = 1
-        animation.duration = 10
+        animation.duration = duration
         animation.delegate = self
         animation.isRemovedOnCompletion = true
         animation.isAdditive = true
