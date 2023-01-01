@@ -11,6 +11,16 @@ class ViewController: UIViewController {
     
     // MARK: - Outlets
     
+    private lazy var textLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Pomodoro timer"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.textAlignment = .center
+        label.numberOfLines = 5
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     // MARK: - Lifecucle
     
