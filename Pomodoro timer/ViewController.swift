@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     var time = 10
     var isWorkTime = false
     var isAnimationStarted = false
+    var colorProgressLayer = UIColor.red.cgColor
     
     // MARK: - Lifecucle
     
@@ -75,6 +76,7 @@ class ViewController: UIViewController {
             timeLabel.text = "00:10"
             isWorkTime = false
             startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            colorProgressLayer = UIColor.red.cgColor
             timeLabel.textColor = .red
             startResumeButton.tintColor = .red
         } else if time < 1 {
@@ -85,6 +87,7 @@ class ViewController: UIViewController {
             time = 5
             timeLabel.text = "00:05"
             startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            colorProgressLayer = UIColor.green.cgColor
             timeLabel.textColor = .green
             startResumeButton.tintColor = .green
         } else {
@@ -97,6 +100,22 @@ class ViewController: UIViewController {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)
+    }
+    
+    func drawBackLayer() {
+        backProgressLayer.path = UIBezierPath(arcCenter: CGPointMake(view.frame.midX, view.frame.midY), radius: 100, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(3 * Double.pi / 2), clockwise: true).cgPath
+        backProgressLayer.strokeColor = UIColor.gray.cgColor
+        backProgressLayer.fillColor = UIColor.clear.cgColor
+        backProgressLayer.lineWidth = 7
+        view.layer.addSublayer(backProgressLayer)
+    }
+    
+    func drawForeLayer() {
+        foreProgressLayer.path = UIBezierPath(arcCenter: CGPointMake(view.frame.midX, view.frame.midY), radius: 100, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(3 * Double.pi / 2), clockwise: true).cgPath
+        foreProgressLayer.strokeColor = colorProgressLayer
+        foreProgressLayer.fillColor = UIColor.clear.cgColor
+        foreProgressLayer.lineWidth = 6
+        view.layer.addSublayer(foreProgressLayer)
     }
     
     // MARK: - Setup
