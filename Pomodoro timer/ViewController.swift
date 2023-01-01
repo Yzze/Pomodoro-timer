@@ -88,7 +88,14 @@ class ViewController: UIViewController {
             startResumeButton.tintColor = .green
         } else {
             time -= 1
+            timeLabel.text = formatTime()
         }
+    }
+    
+    func formatTime() -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
     }
     
     // MARK: - Setup
