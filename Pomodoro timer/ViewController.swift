@@ -51,6 +51,11 @@ class ViewController: UIViewController {
     
     // MARK: - Setup
     
+    private func setupHierarchy() {
+        view.addSubview(textLabel)
+        view.addSubview(timeLabel)
+        view.addSubview(startResumeButton)
+    }
     
     
     // MARK: - Actions
