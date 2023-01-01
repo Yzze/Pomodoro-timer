@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         button.tintColor = .red
         button.imageView?.layer.transform = CATransform3DMakeScale(3, 3, 3)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(startResumeButtomPressed), for: .touchUpInside)
         return button
     }()
     
@@ -127,7 +128,17 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Actions
-
-
+    
+    @objc private func startResumeButtomPressed() {
+        if !isTimerStarted {
+            startTimer()
+            isTimerStarted = true
+            startResumeButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+        } else {
+            timer.invalidate()
+            isTimerStarted = false
+            startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        }
+    }
 }
 
