@@ -99,6 +99,14 @@ class ViewController: UIViewController {
         return String(format: "%02i:%02i", minutes, seconds)
     }
     
+    func drawBackLayer() {
+        backProgressLayer.path = UIBezierPath(arcCenter: CGPointMake(view.frame.midX, view.frame.midY), radius: 100, startAngle: CGFloat(-Double.pi / 2), endAngle: CGFloat(3 * Double.pi / 2), clockwise: true).cgPath
+        backProgressLayer.strokeColor = UIColor.gray.cgColor
+        backProgressLayer.fillColor = UIColor.clear.cgColor
+        backProgressLayer.lineWidth = 7
+        view.layer.addSublayer(backProgressLayer)
+    }
+    
     // MARK: - Setup
     
     private func setupHierarchy() {
