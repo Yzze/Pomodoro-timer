@@ -61,6 +61,43 @@ class ViewController: UIViewController {
         setupLayout()
     }
     
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        if time < 1 && isWorkTime {
+            timer.invalidate()
+            isAnimationStarted = false
+            isTimerStarted = false
+            time = 10
+            timeLabel.text = "00:10"
+            isWorkTime = false
+            startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            timeLabel.textColor = .red
+            startResumeButton.tintColor = .red
+        } else if time < 1 {
+            timer.invalidate()
+            isAnimationStarted = false
+            isTimerStarted = false
+            isWorkTime = true
+            time = 5
+            timeLabel.text = "00:05"
+            startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            timeLabel.textColor = .green
+            startResumeButton.tintColor = .green
+        } else {
+            time -= 1
+            timeLabel.text = formatTime()
+        }
+    }
+    
+    func formatTime() -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
+    }
+    
     // MARK: - Setup
     
     private func setupHierarchy() {
