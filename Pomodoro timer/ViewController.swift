@@ -47,6 +47,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupHierarchy()
+        setupLayout()
     }
     
     // MARK: - Setup
@@ -57,6 +59,25 @@ class ViewController: UIViewController {
         view.addSubview(startResumeButton)
     }
     
+    private func setupLayout() {
+        NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            startResumeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
+            startResumeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startResumeButton.heightAnchor.constraint(equalToConstant: 150),
+            startResumeButton.widthAnchor.constraint(equalToConstant: 150)
+        ])
+    }
     
     // MARK: - Actions
 
