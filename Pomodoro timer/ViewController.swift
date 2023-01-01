@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CAAnimationDelegate {
     
     // MARK: - Outlets
     
@@ -54,11 +54,14 @@ class ViewController: UIViewController {
     var isWorkTime = false
     var isAnimationStarted = false
     var colorProgressLayer = UIColor.red.cgColor
+    var duration = 10.0
     
     // MARK: - Lifecucle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        drawBackLayer()
         setupHierarchy()
         setupLayout()
     }
@@ -70,6 +73,7 @@ class ViewController: UIViewController {
     @objc func updateTimer() {
         if time < 1 && isWorkTime {
             timer.invalidate()
+            duration = 10.0
             isAnimationStarted = false
             isTimerStarted = false
             time = 10
@@ -81,6 +85,7 @@ class ViewController: UIViewController {
             startResumeButton.tintColor = .red
         } else if time < 1 {
             timer.invalidate()
+            duration = 5.0
             isAnimationStarted = false
             isTimerStarted = false
             isWorkTime = true
@@ -118,6 +123,52 @@ class ViewController: UIViewController {
         view.layer.addSublayer(foreProgressLayer)
     }
     
+    func startResumeAnimation() {
+        if !isAnimationStarted {
+            startAnimation()
+        } else {
+            resumeAnimation()
+        }
+    }
+    
+    func startAnimation() {
+        resetAnimation()
+        foreProgressLayer.strokeEnd = 0.0
+        animation.keyPath = "strokeEnd"
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = duration
+        animation.delegate = self
+        animation.isRemovedOnCompletion = true
+        animation.isAdditive = true
+        animation.fillMode = CAMediaTimingFillMode.forwards
+        foreProgressLayer.add(animation, forKey: "strokeEnd")
+        isAnimationStarted = true
+    }
+    
+    func resetAnimation() {
+        foreProgressLayer.speed = 1.0
+        foreProgressLayer.timeOffset = 0.0
+        foreProgressLayer.beginTime = 0.0
+        foreProgressLayer.strokeEnd = 0.0
+        isAnimationStarted = false
+    }
+    
+    func pauseAnimation() {
+        let pausedTime = foreProgressLayer.convertTime(CACurrentMediaTime(), from: nil)
+        foreProgressLayer.speed = 0.0
+        foreProgressLayer.timeOffset = pausedTime
+    }
+    
+    func resumeAnimation() {
+        let pausedTime = foreProgressLayer.timeOffset
+        foreProgressLayer.speed = 1.0
+        foreProgressLayer.timeOffset = 0.0
+        foreProgressLayer.beginTime = -0.6
+        let timeSincePaused = foreProgressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        foreProgressLayer.beginTime = timeSincePaused
+    }
+    
     // MARK: - Setup
     
     private func setupHierarchy() {
@@ -150,10 +201,13 @@ class ViewController: UIViewController {
     
     @objc private func startResumeButtomPressed() {
         if !isTimerStarted {
+            drawForeLayer()
+            startResumeAnimation()
             startTimer()
             isTimerStarted = true
             startResumeButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
         } else {
+            pauseAnimation()
             timer.invalidate()
             isTimerStarted = false
             startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
