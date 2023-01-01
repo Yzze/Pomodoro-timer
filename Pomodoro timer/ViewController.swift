@@ -118,6 +118,20 @@ class ViewController: UIViewController {
         view.layer.addSublayer(foreProgressLayer)
     }
     
+    func startAnimation() {
+        foreProgressLayer.strokeEnd = 0.0
+        animation.keyPath = "strokeEnd"
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 10
+        animation.delegate = self
+        animation.isRemovedOnCompletion = true
+        animation.isAdditive = true
+        animation.fillMode = CAMediaTimingFillMode.forwards
+        foreProgressLayer.add(animation, forKey: "strokeEnd")
+        isAnimationStarted = true
+    }
+    
     // MARK: - Setup
     
     private func setupHierarchy() {
