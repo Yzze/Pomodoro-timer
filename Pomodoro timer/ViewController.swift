@@ -66,7 +66,29 @@ class ViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        
+        if time < 1 && isWorkTime {
+            timer.invalidate()
+            isAnimationStarted = false
+            isTimerStarted = false
+            time = 10
+            timeLabel.text = "00:10"
+            isWorkTime = false
+            startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            timeLabel.textColor = .red
+            startResumeButton.tintColor = .red
+        } else if time < 1 {
+            timer.invalidate()
+            isAnimationStarted = false
+            isTimerStarted = false
+            isWorkTime = true
+            time = 5
+            timeLabel.text = "00:05"
+            startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            timeLabel.textColor = .green
+            startResumeButton.tintColor = .green
+        } else {
+            time -= 1
+        }
     }
     
     // MARK: - Setup
