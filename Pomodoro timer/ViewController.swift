@@ -119,6 +119,7 @@ class ViewController: UIViewController {
     }
     
     func startAnimation() {
+        resetAnimation()
         foreProgressLayer.strokeEnd = 0.0
         animation.keyPath = "strokeEnd"
         animation.fromValue = 0
@@ -130,6 +131,14 @@ class ViewController: UIViewController {
         animation.fillMode = CAMediaTimingFillMode.forwards
         foreProgressLayer.add(animation, forKey: "strokeEnd")
         isAnimationStarted = true
+    }
+    
+    func resetAnimation() {
+        foreProgressLayer.speed = 1.0
+        foreProgressLayer.timeOffset = 0.0
+        foreProgressLayer.beginTime = 0.0
+        foreProgressLayer.strokeEnd = 0.0
+        isAnimationStarted = false
     }
     
     // MARK: - Setup
