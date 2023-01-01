@@ -121,6 +121,14 @@ class ViewController: UIViewController, CAAnimationDelegate {
         view.layer.addSublayer(foreProgressLayer)
     }
     
+    func startResumeAnimation() {
+        if !isAnimationStarted {
+            startAnimation()
+        } else {
+            resumeAnimation()
+        }
+    }
+    
     func startAnimation() {
         resetAnimation()
         foreProgressLayer.strokeEnd = 0.0
@@ -191,10 +199,12 @@ class ViewController: UIViewController, CAAnimationDelegate {
     
     @objc private func startResumeButtomPressed() {
         if !isTimerStarted {
+            startResumeAnimation()
             startTimer()
             isTimerStarted = true
             startResumeButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
         } else {
+            pauseAnimation()
             timer.invalidate()
             isTimerStarted = false
             startResumeButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
