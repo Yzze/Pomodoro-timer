@@ -8,10 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    // MARK: - Outlets
+    
+    
+    // MARK: - Lifecucle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: - Setup
+    
+    
+    
+    // MARK: - Actions
 
 
 }
