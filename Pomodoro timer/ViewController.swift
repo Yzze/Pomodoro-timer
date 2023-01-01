@@ -60,6 +60,8 @@ class ViewController: UIViewController, CAAnimationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        drawBackLayer()
         setupHierarchy()
         setupLayout()
     }
@@ -199,6 +201,7 @@ class ViewController: UIViewController, CAAnimationDelegate {
     
     @objc private func startResumeButtomPressed() {
         if !isTimerStarted {
+            drawForeLayer()
             startResumeAnimation()
             startTimer()
             isTimerStarted = true
