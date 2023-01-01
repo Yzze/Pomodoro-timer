@@ -43,6 +43,11 @@ class ViewController: UIViewController {
         return button
     }()
     
+    var timer = Timer()
+    var isTimerStarted = false
+    var time = 10
+    var isWorkTime = false
+    
     // MARK: - Lifecucle
     
     override func viewDidLoad() {
